@@ -1,0 +1,69 @@
+<% if user_signed_in?  %>
+<p style="font-size: 20px"> Welcome <%= current_user.email %> </p>
+
+<% @posts.each do |post| %>
+
+<div class="post_wrapper" >
+	<div style=" margin-bottom: 20px;">
+		
+ 		<h2 class="title"> <%= link_to post.title, post %></h2>
+		<p class="date"> Created At <%= post.created_at.strftime("%B,%d,%Y") %></p>
+		<p> Post Created by <%= post.user.email %> </p>
+		<% if post.comments.present? %>
+			<p> Last Comment : <%= post.comments.last[:body] %> </p>
+			<p> Comment issued by username : <%= post.comments.last[:name] %> </p>
+	 	<% end %>
+		<% if post.published == true %>
+        <p> Published <%= time_ago_in_words(post.updated_at) %> Ago  </p>
+        <% end %>
+        <% if post.published == false %>
+        <p> Unpublsihed  </p>
+        <% end %>	
+    </div>
+   
+</div>
+    <hr style="color:#cccc">
+
+<% end %>
+
+<% end %>
+
+
+
+<% if !user_signed_in? %>
+    
+
+
+<% @post.each do |post| %>
+
+<div class="post_wrapper" >
+	<div style=" margin-bottom: 20px;">
+		
+ 		<h2 class="title"> <%= link_to post.title, post %></h2>
+		<p class="date"> Created At <%= post.created_at.strftime("%B,%d,%Y") %></p>
+		<p> Post Created by <%= post.user.email %> </p>
+<% if post.comments.present? %>
+		<p> Last Comment : <%= post.comments.last[:body] %> </p>
+		<p> Comment issued by username : <%= post.comments.last[:name] %> </p>
+         <% end %>
+		<% if post.published == true %>
+        <p> Published <%= time_ago_in_words(post.updated_at) %> Ago </p>
+        
+        <% end %>
+	
+        
+    </div>
+   
+   
+
+    <hr style="color:#cccc">
+<%end%>
+ <% end %>
+
+   
+
+
+
+
+
+

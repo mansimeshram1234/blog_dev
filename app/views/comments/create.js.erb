@@ -1,0 +1,3 @@
+$('#com_content').append( "<%= j  render @comment %>"	);
+$(':text').val("");
+$('#count').html("<%= @post.comments.count %> Comments");

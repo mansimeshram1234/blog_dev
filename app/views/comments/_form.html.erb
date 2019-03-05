@@ -1,0 +1,16 @@
+<%= form_for ([@post,@post.comments.build]),remote:true do |f| %>
+<p>
+	<%= f.label :name %> <br>
+
+	<%= f.text_field :name %>
+</p>
+<p>
+	<%= f.label :body %> <br>
+
+	<%= f.text_field :body ,placeholder: "Share your ideas" %>
+</p>
+<br>
+<p>
+	<%= f.submit %>
+</p>
+<% end %>

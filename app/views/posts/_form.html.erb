@@ -1,0 +1,87 @@
+
+<%= form_for @post do |f| %>
+<% if @post.errors.any? %>
+
+
+<div id="errors">
+	<h2> <%= pluralize(@post.errors.count,"error") %>Prevented this post from saving</h2>
+
+	<ul> 
+		<% @post.errors.full_messages.each do |msg| %>
+		<li> <%= msg %></li>
+		<% end %>
+	</ul>
+</div>
+
+<% end %>
+
+<% if user_signed_in? && current_user.utype!='admin' %>
+
+<div>
+	<p>
+	<%= f.label :title %><br>
+	<%= f.text_field :title %>
+	</p>
+</div>
+
+
+
+<div>
+	<p>
+	<%= f.label :body %><br>
+	<%= f.text_field :body %>
+	</p>
+</div>
+ <div>
+	<p>
+	<%= f.label :all_tags%><br>
+	<%= f.text_field :all_tags, placeholder: "Tags separated with comma" %>
+	</p>
+</div>
+
+
+<div>
+	<p>
+		<%= f.submit %>
+	</p>
+</div>
+<% end %>
+
+
+
+<% if user_signed_in? && current_user.utype =="admin" %>
+
+<div>
+	<p>
+	<%= f.label :title %><br>
+	<%= f.text_field :title %>
+	</p>
+</div>
+
+
+
+<div>
+	<p>
+	<%= f.label :body %><br>
+	<%= f.text_field :body %>
+	</p>
+</div>
+ <div>
+	<p>
+	<%= f.label :all_tags%><br>
+	<%= f.text_field :all_tags, placeholder: "Tags separated with comma" %>
+	</p>
+</div>
+<div>
+Publish <%= f.radio_button :published,"true" %>
+Unpublish <%= f.radio_button :published,"false" %>
+</div>
+
+<div>
+	<p>
+		<%= f.submit %>
+	</p>
+ </div>
+ <% end %>
+
+<% end %>

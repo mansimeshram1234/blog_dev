@@ -1,0 +1,79 @@
+<div id="post_content" >
+
+<h1 class="title">
+
+	<%= @post.title %>
+</h1>
+
+
+
+<p class = "date" >
+Submitted <%= time_ago_in_words(@post.created_at) %> Ago by <%= @post&.user&.email %>
+
+ <p>
+All tags: <%= raw @post.all_tags %>
+</p> 
+
+
+<% if user_signed_in?  || current_user.utype=='admin'%>
+| <%= link_to 'Edit', edit_post_path(@post) %>
+| <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?'}  %>
+<p class ="body">
+	<%= @post.body %>
+</p>
+
+<div id="comments">
+<div id="com_content">
+
+
+	<h2 id="count"> <%= @post.comments.count %> Comments </h2>
+	<%= render @post.comments %>
+</div>
+	<h3> Add a comment: </h3>
+	<%= render "comments/form"%>
+	
+</div>
+</div>
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if !user_signed_in?%>
+
+
+<p class ="body">
+	<%= @post.body %>
+</p>
+
+<div id="comments">
+<div id="com_content">
+
+
+	<h2 id="count"> <%= @post.comments.count %> Comments </h2>
+	<%= render @post.comments  %>
+</div>
+</div>
+
+
+<% end %>
+
+
+
+
+
